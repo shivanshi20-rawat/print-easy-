@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrintEasy - Shopkeeper Dashboard</title>
+
+<!-- ICON LIBRARY -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== GLOBAL ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+    color:#1f3c88;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    align-items:center;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-size:15px;
+    transition:0.3s;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.nav-links a:hover{
+    color:#1f3c88;
+}
+
+.active{
+    color:#1f3c88;
+    font-weight:bold;
+    border-bottom:2px solid #1f3c88;
+    padding-bottom:3px;
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.logout{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.logout:hover{
+    background:#c0392b;
+}
+
+/* ===== HEADER ===== */
+.page-header{
+    text-align:center;
+    margin:30px 0;
+}
+
+.page-header h2{
+    color:#1f3c88;
+}
+
+.page-header p{
+    color:#666;
+}
+
+/* ===== CONTAINER ===== */
+.container{
+    width:95%;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* ===== TABLE ===== */
+table{
+    width:100%;
+    border-collapse: collapse;
+}
+
+table th, table td{
+    border:1px solid #ddd;
+    padding:12px;
+    text-align:center;
+}
+
+table th{
+    background:#1f3c88;
+    color:white;
+}
+
+tr:nth-child(even){
+    background:#f9f9f9;
+}
+
+/* ===== BUTTONS ===== */
+.download-btn{
+    background:#3498db;
+    color:white;
+    padding:6px 10px;
+    border-radius:6px;
+    text-decoration:none;
+}
+
+.download-btn:hover{
+    background:#2c80b4;
+}
+
+.print-btn{
+    background:green;
+    color:white;
+    padding:6px 10px;
+    border-radius:6px;
+    text-decoration:none;
+}
+
+.print-btn:hover{
+    background:darkgreen;
+}
+
+/* ===== STATUS ===== */
+.status-pending{
+    color:orange;
+    font-weight:bold;
+}
+
+.status-complete{
+    color:green;
+    font-weight:bold;
+}
+
+/* ===== QUEUE ===== */
+.queue-box{
+    margin-top:25px;
+    padding:20px;
+    background:#f5f9ff;
+    border-radius:10px;
+}
+
+.stats{
+    display:flex;
+    justify-content:space-around;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PRINT SUCCESS POPUP -->
+{% if request.args.get('msg') == 'completed' %}
+<script>
+alert("Print Completed Successfully!");
+</script>
+{% endif %}
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <div class="logo">PrintEasy</div>
+
+    <div class="nav-links">
+        <a href="/home"><i class="fas fa-home"></i> Home</a>
+        <a href="/shopkeeper-dashboard" class="active">
+            <i class="fas fa-print"></i> Print Requests
+        </a>
+        <a href="/invoice"><i class="fas fa-file-invoice"></i> Invoice</a>
+        <a href="/earnings"><i class="fas fa-chart-line"></i> Earnings</a>
+    </div>
+
+    <button class="logout" onclick="window.location.href='/logout'">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+
+</div>
+
+<!-- HEADER -->
+<div class="page-header">
+    <h2>Print Requests Dashboard</h2>
+    <p>Manage and process student print jobs efficiently</p>
+</div>
+
+<!-- TABLE -->
+<div class="container">
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Student</th>
+    <th>File</th>
+    <th>Pages</th>
+    <th>Copies</th>
+    <th>Type</th>
+    <th>Price</th>
+    <th>Time</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for req in requests %}
+<tr>
+<td>{{ req[0] }}</td>
+<td>{{ req[1] }}</td>
+
+<td>
+{{ req[2] }} <br><br>
+<a href="/download/{{ req[2] }}" class="download-btn">
+<i class="fas fa-download"></i>
+</a>
+</td>
+
+<td>{{ req[3] }}</td>
+<td>{{ req[4] }}</td>
+<td>{{ req[5] }}</td>
+<td>₹{{ req[7] }}</td>
+<td>{{ req[9] }}</td>
+
+<td>
+{% if req[8] == 'Pending' %}
+<span class="status-pending">Pending</span>
+{% else %}
+<span class="status-complete">Completed</span>
+{% endif %}
+</td>
+
+<td>
+{% if req[8] == 'Pending' %}
+<a href="/print/{{ req[0] }}" class="print-btn">
+<i class="fas fa-print"></i>
+</a>
+{% else %}
+Done
+{% endif %}
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+<!-- QUEUE STATS -->
+<div class="queue-box">
+
+<h3>Queue Manager</h3>
+
+<div class="stats">
+
+<p>Total: {{ requests|length }}</p>
+
+<p>
+Pending:
+{{ requests | selectattr(8, 'equalto', 'Pending') | list | length }}
+</p>
+
+<p>
+Completed:
+{{ requests | selectattr(8, 'equalto', 'Completed') | list | length }}
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

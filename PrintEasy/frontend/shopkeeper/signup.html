@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopkeeper Signup</title>
+
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4ca1af, #2c3e50);
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .signup-box{
+            background:white;
+            padding:40px;
+            width:350px;
+            border-radius:15px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        h2{
+            margin-bottom:25px;
+            color:#2c3e50;
+        }
+
+        input{
+            width:90%;
+            padding:12px;
+            margin:10px 0;
+            border:1px solid #ccc;
+            border-radius:8px;
+            font-size:16px;
+        }
+
+        button{
+            width:95%;
+            padding:12px;
+            background:#2c3e50;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            cursor:pointer;
+            margin-top:10px;
+        }
+
+        button:hover{
+            background:#34495e;
+        }
+
+        a{
+            display:block;
+            margin-top:15px;
+            text-decoration:none;
+            color:#2980b9;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="signup-box">
+
+    <h2>Shopkeeper Signup</h2>
+
+    <form action="/shopkeeper-signup" method="POST">
+
+        <input type="text"
+               name="username"
+               placeholder="Username"
+               pattern="[A-Za-z0-9]{3,12}"
+               title="Username must be 3-12 letters or numbers"
+               required>
+
+        <input type="password"
+               name="password"
+               placeholder="Password"
+               pattern="[A-Za-z0-9]{4,8}"
+               title="Password must be 4-8 alphanumeric characters"
+               required>
+
+        <button type="submit">Signup</button>
+
+    </form>
+
+    <a href="/shopkeeper-login">Already have account? Login</a>
+
+</div>
+
+</body>
+</html>

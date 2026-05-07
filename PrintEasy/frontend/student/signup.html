@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Signup - PrintEasy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-container {
+            background: white;
+            padding: 40px;
+            width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signup-container h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .signup-container p {
+            color: gray;
+            margin-bottom: 25px;
+        }
+
+        .input-box {
+            width: 100%;
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .input-box input:focus {
+            border-color: #4facfe;
+        }
+
+        .eye-btn {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            color: gray;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4facfe;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .signup-btn:hover {
+            background: #2d8cf0;
+        }
+
+        .login-link {
+            margin-top: 15px;
+            display: block;
+            color: #4facfe;
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: gray;
+            text-align: left;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+
+        .strength {
+            font-size: 13px;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h1>PrintEasy</h1>
+        <p>Create Student Account</p>
+
+        <form action="/signup" method="POST">
+
+            <div class="input-box">
+                <input type="text" name="name" placeholder="Full Name" required>
+            </div>
+
+            <div class="input-box">
+                <input type="email" name="email" placeholder="Enter Email" required>
+            </div>
+
+            <div class="input-box">
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Create Password"
+                       minlength="4"
+                       maxlength="8"
+                       pattern="[A-Za-z0-9]{4,8}"
+                       title="Password must be 4 to 8 characters and contain only letters and numbers"
+                       onkeyup="checkStrength()"
+                       required>
+                <span class="eye-btn" onclick="togglePassword()">👁</span>
+            </div>
+
+            <div class="hint">
+                Password must be 4–8 letters or numbers only
+            </div>
+
+            <div class="strength" id="strength"></div>
+
+            <div class="input-box">
+                <input type="password"
+                       name="confirm_password"
+                       placeholder="Confirm Password"
+                       minlength="4"
+                       maxlength="8"
+                       pattern="[A-Za-z0-9]{4,8}"
+                       required>
+            </div>
+
+            <button type="submit" class="signup-btn">Signup</button>
+
+        </form>
+
+        <a href="/" class="login-link">Already have an account? Login</a>
+    </div>
+
+    <script>
+        function togglePassword() {
+            let password = document.getElementById("password");
+
+            if (password.type === "password") {
+                password.type = "text";
+            } else {
+                password.type = "password";
+            }
+        }
+
+        function checkStrength() {
+            let password = document.getElementById("password").value;
+            let strength = document.getElementById("strength");
+
+            if (password.length <= 3) {
+                strength.innerHTML = "";
+            } else if (password.length <= 5) {
+                strength.innerHTML = "Weak Password";
+                strength.style.color = "red";
+            } else if (password.length <= 7) {
+                strength.innerHTML = "Medium Password";
+                strength.style.color = "orange";
+            } else {
+                strength.innerHTML = "Strong Password";
+                strength.style.color = "green";
+            }
+        }
+    </script>
+
+</body>
+</html>

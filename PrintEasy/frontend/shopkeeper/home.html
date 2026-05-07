@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrintEasy - Home</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background:#f4f6fb;
+}
+
+/* TOP BAR */
+.top-bar{
+    width:100%;
+    background:#1f3c88;
+    color:white;
+    padding:15px 30px;
+    display:flex;
+    justify-content:flex-end;
+}
+
+.logout{
+    background:#e74c3c;
+    border:none;
+    padding:8px 16px;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+}
+
+/* CENTER */
+.container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height:85vh;
+    text-align:center;
+}
+
+h1{
+    color:#1f3c88;
+    margin-bottom:10px;
+}
+
+.desc{
+    color:#555;
+    margin-bottom:40px;
+    width:60%;
+}
+
+/* CARDS */
+.cards{
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    width:220px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card i{
+    font-size:40px;
+    margin-bottom:15px;
+    color:#1f3c88;
+}
+
+.card h3{
+    color:#333;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:15px;
+    background:#eaeef5;
+    font-size:14px;
+    color:#555;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <button class="logout" onclick="window.location.href='/logout'">
+        Logout
+    </button>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+    <h1>Welcome to PrintEasy</h1>
+
+    <p class="desc">
+        Manage all print requests, track earnings, and generate invoices easily in one place.
+    </p>
+
+    <div class="cards">
+
+        <!-- PRINT REQUEST -->
+        <div class="card" onclick="window.location.href='/shopkeeper-dashboard'">
+            <i class="fas fa-print"></i>
+            <h3>Print Requests</h3>
+        </div>
+
+        <!-- INVOICE -->
+        <div class="card" onclick="window.location.href='/invoice'">
+            <i class="fas fa-file-invoice"></i>
+            <h3>Invoices</h3>
+        </div>
+
+        <!-- EARNINGS -->
+        <div class="card" onclick="window.location.href='/earnings'">
+            <i class="fas fa-chart-line"></i>
+            <h3>Earnings</h3>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p><strong>Project:</strong> PrintEasy</p>
+    <p><strong>Team:</strong> Shivanshi Rawat & Suhani Bora</p>
+    <p>BCA 6th Semester | 2026</p>
+</div>
+
+</body>
+</html>

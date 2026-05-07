@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - PrintEasy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            width: 380px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-container h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .login-container p {
+            color: gray;
+            margin-bottom: 25px;
+        }
+
+        .input-box {
+            width: 100%;
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .input-box input:focus {
+            border-color: #4facfe;
+        }
+
+        .eye-btn {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            color: gray;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4facfe;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #2d8cf0;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+            display: block;
+            color: #4facfe;
+            text-decoration: none;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+
+        .extra-options {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 15px;
+            color: gray;
+        }
+
+        .extra-options a {
+            color: #4facfe;
+            text-decoration: none;
+        }
+
+        .extra-options a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>PrintEasy</h1>
+        <p>Student Login</p>
+
+        <form action="/student-login" method="POST">
+
+            <div class="input-box">
+                <input type="email" name="email" placeholder="Enter Email" required>
+            </div>
+
+            <div class="input-box">
+                <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                <span class="eye-btn" onclick="togglePassword()">👁</span>
+            </div>
+
+            <div class="extra-options">
+                
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+
+        </form>
+
+        <a href="/signup" class="signup-link">Create Account</a>
+    </div>
+
+    <script>
+        function togglePassword() {
+            let password = document.getElementById("password");
+
+            if (password.type === "password") {
+                password.type = "text";
+            } else {
+                password.type = "password";
+            }
+        }
+    </script>
+
+</body>
+</html>
